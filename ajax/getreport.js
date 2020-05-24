@@ -1,4 +1,3 @@
-       <script>
 function getReport(reportFile, viewID) {
   if (reportFile == "") {
         document.getElementById(viewID).innerHTML = "";
@@ -20,4 +19,3 @@ function getReport(reportFile, viewID) {
         xmlhttp.send();
     }
 }
-</script>
