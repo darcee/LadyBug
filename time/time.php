@@ -29,3 +29,5 @@ $testtime = timezoneChange_To_UTC($starttime, $timezone);
 echo "This is the shifted time: ".$testtime."<br>";
 $testtime = timezoneChange_From_UTC($starttime, $timezone);
 echo "This is new time : ".$testtime."<br>";
+function stopWatch($time1, $time2){}
+
