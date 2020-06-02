@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.673.0.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title >Hello, world!</title>
+  </head>
+  <body>
+    <div class="container shadow p-3 m-5 bg-white rounded">
+    <h3 class=m-3>Speak to Me</h3>
+<div class="row">
+  <div class="col-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active" id="v-pills-instructions-tab" data-toggle="pill" href="#v-pills-instructions " role="tab" aria-controls="v-pills-instructions " aria-selected="true">Instructions</a>
+      <a onclick="formUpdate('1')" class="nav-link" id="v-pills-tisket-tab" data-toggle="pill" href="#v-pills-tisket " role="tab" aria-controls="v-pills-tisket " aria-selected="true">A-tisket a-tasket</a>
+      <a onclick="formUpdate('2')" class="nav-link" id="v-pills-sheep-tab" data-toggle="pill" href="#v-pills-sheep" role="tab" aria-controls="v-pills-sheep" aria-selected="false">Baa, baa, black sheep</a>
+      <a onclick="formUpdate('3')" class="nav-link" id="v-pills-Georgie-tab" data-toggle="pill" href="#v-pills-Georgie" role="tab" aria-controls="v-pills-Georgie" aria-selected="false">Georgie Porgie</a>
+      <a onclick="formUpdate('4')" class="nav-link" id="v-pills-Diddle-tab" data-toggle="pill" href="#v-pills-Diddle" role="tab" aria-controls="v-pills-Diddle" aria-selected="false">Hey Diddle, Diddle!</a>
+      <a onclick="formUpdate('5')" class="nav-link" id="v-pills-lmm-tab" data-toggle="pill" href="#v-pills-lmm" role="tab" aria-controls="v-pills-lmm" aria-selected="false">Little Miss Muffet</a>
+      <a onclick="formUpdate('6')" class="nav-link" id="v-pills-mary-tab" data-toggle="pill" href="#v-pills-mary" role="tab" aria-controls="v-pills-mary" aria-selected="false">Mary had a little lamb</a>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-instructions" role="tabpanel" aria-labelledby="v-pills-instructions-tab"><p>Select a nursery rhyme, record yourself reading it.  You can listen to the file.  Then click "transcribe".  The magic of AWS will upload the file, transcode and transcribe it and show you what it thinks you said.  Let us know how good a job Transcribe does. </p></div>
+      <div class="tab-pane fade" id="v-pills-tisket" role="tabpanel" aria-labelledby="v-pills-tisket-tab"><p>A-tisket a-tasket<br>
+A green and yellow basket<br>
+I wrote a letter to my mom<br>
+And on the way I dropped it,<br>
+I dropped it, I dropped it,<br>
+And on the way I dropped it.<br>
+A little boy he picked it up<br>
+And put it in his pocket.</p></div>
+      <div class="tab-pane fade" id="v-pills-sheep" role="tabpanel" aria-labelledby="v-pills-sheep-tab"><p>
+        Baa, baa, black sheep,<br>
+Have you any wool?<br>
+Yes, sir, yes, sir,<br>
+Three bags full;<br>
+One for the master,<br>
+And one for the dame,<br>
+And one for the little boy<br>
+Who lives down the lane.<br>
+      </p></div>
+      <div class="tab-pane fade" id="v-pills-Georgie" role="tabpanel" aria-labelledby="v-pills-Georgie-tab"><p>
+       <p> Georgie Porgie, pudding and pie,<br>
+Kissed the girls and made them cry,<br>
+When the boys came out to play,<br>
+Georgie Porgie ran away.<br>
+      </p></div>
+      <div class="tab-pane fade" id="v-pills-Diddle" role="tabpanel" aria-labelledby="v-pills-Diddle-tab"><p>Hey Diddle, Diddle!<br>
+The cat and the fiddle,<br>
+The cow jumped over the moon;<br>
+The little dog laughed<br>
+To see such sport,<br>
+And the dish ran away with the spoon.</p></div>
+      <div class="tab-pane fade" id="v-pills-lmm" role="tabpanel" aria-labelledby="v-pills-lmm-tab"><p>Little Miss Muffet<br>
+Sat on a tuffet,<br>
+Eating her curds and whey;<br>
+There came a big spider,<br>
+Who sat down beside her<br>
+And frightened Miss Muffet away.</p></div>
+      <div class="tab-pane fade" id="v-pills-mary" role="tabpanel" aria-labelledby="v-pills-mary-tab"><p>Mary had a little lamb,<br>
+   Its fleece was white as snow,<br>
+And every where that Mary went<br>
+   The lamb was sure to go ;<br>
+He followed her to school one day—<br>
+   That was against the rule,<br>
+It made the children laugh and play,<br>
+   To see a lamb at school.</p></div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+<p>
+  <button id=startRecording class="btn btn-success">Start</button>
+  <button id=stopRecording class="btn btn-danger">Stop</button>
+</p> 
+<p>
+  <audio id=recordedAudioFile></audio>
+</p>
+</div></div>
+<div class="card">
+  <form action="MYEC2RUNNINGPHP/transcribe.php">
+   <input type="hidden" id="myTranscribe" name="myTranscribe" value="">
+   <input type="hidden" id="myText" name="myTtext" value="">
+  <div class="card-body" id='view1'>
+
+    <button id="transcribe" type="submit" class="btn btn-success">load transcription</button>
+
+  </div></div>
+<!--
+<form>
+  <div class="form-row mt-5">
+    <div class="col">
+      <input type="text" class="form-control" id='yourname' name='yourname' placeholder="Your Name">
+    </div>
+
+  </div>
+</form> -->
+</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+  startRecording.onclick = e =>{
+    console.log('pass - startRecording clicked');
+    startRecording.disabled = true;
+    stopRecording.disabled = false;
+    recordingStream = [];
+    recordFile.start();
+  }
+  stopRecording.onclick = e =>{
+    console.log('pass - stopRecording clicked');
+    stopRecording.disabled = true;
+    startRecording.disabled = false;
+    recordFile.stop();
+  }
+  navigator.mediaDevices.getUserMedia({ audio: true }).then(audioStream => {recordNewAudio(audioStream)})
+
+  function recordNewAudio(audioStream){
+    recordFile = new MediaRecorder(audioStream);
+    recordFile.ondataavailable = e => {
+    recordingStream.push(e.data);
+    if (recordFile.state == "inactive"){
+     var blob = new Blob(recordingStream,{type:'audio/mp3'});
+
+    recordedAudioFile.src = URL.createObjectURL(blob);
+    recordedAudioFile.controls=true;
+    uploadFileS3(blob)
+    }
+    }
+ }
+function uploadFileS3(blob) {
+AWS.config.region = 'us-west-2'; // Region
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: '',
+});
+var bucketName = '';
+var s3 = new AWS.S3({
+  apiVersion: "2006-03-01",
+  params: { Bucket: bucketName }
+});
+     var timeInMs = Date.now();
+     fileName = timeInMs+'.mp3';
+    console.log('stringtime ' + fileName);
+     var file = new File([blob], fileName);
+     var currentObject = 'recordings/'+ file.name;
+     var params = {
+        Key: currentObject,
+        ContentType: file.type,
+        Body: file,
+        ACL: 'public-read'
+    };
+     console.log('file ' + currentObject);
+
+           s3.putObject(params, function(err, data) {
+                if (err) {
+
+                    console.log(" Error while  UPLOADING recording :");
+                } else {
+                    console.log(" Success UPLOADING recording :");
+                }
+            });
+document.getElementById("myTranscribe").value = file.name;
+ //upload to S3 https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html
+}
+function formUpdate(textid) {
+  document.getElementById("myText").value = textid;
+}
+
+</script>
+  </body>
+</html>
