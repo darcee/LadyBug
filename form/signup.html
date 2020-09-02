@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AHP Tool</title>
+<style type="text/css">
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px; 
+  box-sizing: border-box; 
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical 
+}
+
+button {
+  background-color: #4040ff;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+
+</style>
+</head>
+<body>
+<form action="action_page.php" style="border:1px solid #ccc">
+  <div class="container">
+    <h1>Sign Up</h1>
+    <p>Please complete:</p>
+    <hr>
+
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstname" placeholder="First Name">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastname" placeholder="Last Name">
+
+    <label for="email">Email</label>
+    <input type="text" placeholder="Email " name="email" required>
+
+    <label for="zip">Zip Code</label>
+    <input type="text" placeholder="Home Zip Code" name="zip" required>
+
+    <div class="clearfix">
+      <button type="submit">Sign Up</button>
+    </div>
+  </div>
+</form>
+
+
+</body>
+</html>

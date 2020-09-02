@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Reorder List</title>
+<style type="text/css">
+li {
+  border: 1px solid grey;
+  margin: 0px 5px 15px 15px;
+  padding: 3px 10px;
+  width: 300px;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#div1 {
+  width: 350px;
+  height: 70px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+</style>
+<script>
+function addListItem(elementID) {
+  var ul = document.getElementById("reorderablelist");
+  var li = document.createElement("li");
+  li.appendChild(document.createTextNode("Four"));
+  li.setAttribute("id", elementID); // added line
+  ul.appendChild(li);
+  alert(li.id);
+}
+</script>
+</head>
+<body>
+<div>
+<ul id="reorderablelist">
+  <li class="listitem"  draggable="true" id="drag1" ondragstart="drag(event)">Public Health Professional </li>
+  <li class="listitem" draggable="true" id="drag2" ondragstart="drag(event)">Healthcare Provider</li>
+  <li class="listitem" draggable="true" id="drag3" ondragstart="drag(event)">Economist</li>
+  <li class="listitem" draggable="true" id="drag4" ondragstart="drag(event)">Business Owner/ Manager</li>
+  <li class="listitem" draggable="true" id="drag5" ondragstart="drag(event)">Concerned Citizen</li>
+  <li class="listitem" draggable="true" id="drag6" ondragstart="drag(event)">Social Justice Advocate</li>
+  <li class="listitem" draggable="true" id="drag7" ondragstart="drag(event)">Politician</li>
+  <li class="listitem" draggable="true" id="drag8" ondragstart="drag(event)">Vladimir Putin / Lord Voldemort</li>
+</ul>
+</div>
+
+<button onclick="addListItem('drag9')">Add Option</button>
+</body>
+</html>
