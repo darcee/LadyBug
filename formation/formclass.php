@@ -48,6 +48,15 @@ class textInput extends FormInput {
 		return $label."<input type='text' id='$this->name' name='$this->name' value='$this->value' class='$this->style' $this->required><br>";
 	}
 }
+class passwordInput extends FormInput {
+	function displayInput(){
+	    $label='';
+		if (isset($this->label)){
+			$label = "<label for='$this->name'>$this->label: </label>";
+		}
+		return $label."<input type='password' id='$this->name' name='$this->name' value='$this->value' class='$this->style' $this->required><br>";
+	}
+}
 
 
 /* from input array is created with the class and the methods set the form input variables this is done in the php file  Custome styles can be set in the .css file and called here using a method */
@@ -67,7 +76,14 @@ $lastName->label('Last Name');
 $lastName->setValidate('date');
 
 
-$feilds = array($firstName, $lastName);
+$password = new passwordInput('password');
+$password->isRequired(true);
+$password->value('Password');
+$password->label('Password');
+$password->setValidate('password');
+
+
+$feilds = array($firstName, $lastName, $password);
 
 
 /* the HTML is created with a loop */
@@ -90,7 +106,7 @@ foreach($feilds as $feild) {
 
 /* Validation for all feilds with the validation method set happens here */
 
-var_dump($_POST);
+
 foreach($feilds as $feild) {
 	if($feild->validate() != null) {
 		echo "validate this feild ".$feild->name." we are validating it useing the method for this type: ".$feild->validate() ."<br>";
