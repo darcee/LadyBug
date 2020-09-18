@@ -35,6 +35,9 @@ abstract class FormInput {
 	public function label($label) {
 		$this->label = $label;
 	}
+	public function radioArray($radioArray) {
+		$this->radioArray = $radioArray;
+	}	
 	public function style($style) {
 		$this->style = $style;
 	}
@@ -58,6 +61,21 @@ class passwordInput extends FormInput {
 	}
 }
 
+class radioInput extends FormInput {
+	function displayInput(){
+		$inputs ='';
+	    $label='';
+	    foreach ($this->radioArray as $key => $value) {
+	    	 $inputs =  $inputs . "<input type='radio' id='$this->name' name='$key' value='$value'> <label for='$key'>$key</label><br>";
+	    }
+		if (isset($this->label)){
+			$label = "<label for='$this->name'>$this->label: </label><br>";
+		}
+
+
+		return $label.$inputs;
+	}
+}
 
 /* from input array is created with the class and the methods set the form input variables this is done in the php file  Custome styles can be set in the .css file and called here using a method */
 
@@ -73,7 +91,7 @@ $lastName = new textInput('lName');
 $lastName->isRequired(false);
 $lastName->value('Last Name');
 $lastName->label('Last Name');
-$lastName->setValidate('date');
+$lastName->setValidate('text');
 
 
 $password = new passwordInput('password');
@@ -82,8 +100,19 @@ $password->value('Password');
 $password->label('Password');
 $password->setValidate('password');
 
+$radioArray = [
+	'option1'=> 1,
+	'option2'=> 2,
+	'option3'=> 3	
+];
+$radio = new radioInput('radio');
+$radio->isRequired(true);
+$radio->value('radio');
+$radio->label('radio');
+$radio->radioArray($radioArray);
+$radio->setValidate('radio');
 
-$feilds = array($firstName, $lastName, $password);
+$feilds = array($firstName, $lastName, $password, $radio);
 
 
 /* the HTML is created with a loop */
@@ -100,7 +129,7 @@ foreach($feilds as $feild) {
 }
 
 ?>
-  <input type="submit" value="Submit">
+  <br><input type="submit" value="Submit">
 </form> 
 <?php
 
