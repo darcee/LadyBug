@@ -44,36 +44,53 @@ abstract class FormInput {
 }
 class textInput extends FormInput {
 	function displayInput(){
-	    $label='';
+	    $label = '';
+	    $error = '';
 		if (isset($this->label)){
 			$label = "<label for='$this->name'>$this->label: </label>";
 		}
-		return $label."<input type='text' id='$this->name' name='$this->name' value='$this->value' class='$this->style' $this->required><br>";
+		if ((isset($this->feedback))&&($this->feedback=='error')){
+			$error = "<div class='invalid-feedback'>This is error text.</div><br>";
+		}elseif ((isset($this->feedback))&&($this->feedback=='valid')){
+			$error = "<div class='valid-feedback'>Looks good!</div>";
+		}		
+		return $label."<input type='text' id='$this->name' name='$this->name' value='$this->value' class='$this->style' $this->required><br>".$error;
+
 	}
 }
 class passwordInput extends FormInput {
 	function displayInput(){
-	    $label='';
+	  	$label = '';
+	    $error = '';
 		if (isset($this->label)){
 			$label = "<label for='$this->name'>$this->label: </label>";
 		}
-		return $label."<input type='password' id='$this->name' name='$this->name' value='$this->value' class='$this->style' $this->required><br>";
+		if ((isset($this->feedback))&&($this->feedback=='error')){
+			$error = "<div class='invalid-feedback'>This is error text.</div><br>";
+		}elseif ((isset($this->feedback))&&($this->feedback=='valid')){
+			$error = "<div class='valid-feedback'>Looks good!</div>";
+		}		
+		return $label."<input type='password' id='$this->name' name='$this->name' value='$this->value' class='$this->style' $this->required><br>".$error;
 	}
 }
 
 class radioInput extends FormInput {
 	function displayInput(){
 		$inputs ='';
-	    $label='';
+	    $label = '';
+	    $error = '';;
 	    foreach ($this->radioArray as $key => $value) {
 	    	 $inputs =  $inputs . "<input type='radio' id='$this->name' name='$key' value='$value'> <label for='$key'>$key</label><br>";
 	    }
 		if (isset($this->label)){
 			$label = "<label for='$this->name'>$this->label: </label><br>";
 		}
-
-
-		return $label.$inputs;
+		if ((isset($this->feedback))&&($this->feedback=='error')){
+			$error = "<div class='invalid-feedback'>This is error text.</div><br>";
+		}elseif ((isset($this->feedback))&&($this->feedback=='valid')){
+			$error = "<div class='valid-feedback'>Looks good!</div>";
+		}
+		return $label.$inputs.$error;
 	}
 }
 
