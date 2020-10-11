@@ -111,6 +111,17 @@ $lastName->label('Last Name');
 $lastName->setValidate('text');
 
 
+$address1 = new textInput('address1');
+$address1->isRequired(true);
+$address1->value('123 South G St');
+$address1->label('Address 1');
+$address1->setValidate('text');
+
+
+
+
+
+
 $password = new passwordInput('password');
 $password->isRequired(true);
 $password->value('Password');
@@ -129,7 +140,7 @@ $radio->label('radio');
 $radio->radioArray($radioArray);
 $radio->setValidate('radio');
 
-$feilds = array($firstName, $lastName, $password, $radio);
+$feilds = array($firstName, $lastName, $address1, $password, $radio);
 
 
 /* the HTML is created with a loop */
